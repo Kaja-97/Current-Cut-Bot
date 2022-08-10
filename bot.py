@@ -13,10 +13,11 @@ import os
 import time
 import chromedriver_binary
 import telebot
+from telebot import types
 from dotenv import load_dotenv
 config = load_dotenv(".env")
-import datetime
-import selenium
+# import datetime
+# import selenium
 
 
 
@@ -50,7 +51,7 @@ def greet(message):
             soup=BeautifulSoup(driver.page_source,'html')
             paperpg=soup.find('img',id='pageImage')['src']
             bot.send_photo(chat_id, paperpg, protect_content=True ,disable_notification=True)
-    except:
+    except Exception:
         bot.reply_to(message,'sorry , maintenance Break' )
 
 
