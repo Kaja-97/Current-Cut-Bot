@@ -11,6 +11,7 @@ import pandas as pd
 from selenium import webdriver
 import os
 import time
+import telebot
 import chromedriver_binary
 from dotenv import load_dotenv
 config = load_dotenv(".env")
