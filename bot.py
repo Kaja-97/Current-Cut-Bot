@@ -146,7 +146,7 @@ def greet(message):
 @bot.message_handler(commands=['start'])
 def greet(message):
 #     user_first_name = str(message.chat.first_name) 
-    bot.reply_to(message, f"Hey!  \n Welcome 😍 \n,Please type your zone , (ex :- /A )  \n, Do you want to read today News paper Type /Paper ")
+    bot.reply_to(message, f"Hey!  \n Welcome 😍 \n Please type your zone , (ex :- /A )  \n Do you want to read today News paper Type /Paper ")
     
 ########### telegram bot'''#########################################
 driver =webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
