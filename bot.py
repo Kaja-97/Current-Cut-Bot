@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 # coding: utf-8
 
@@ -14,9 +15,12 @@ import chromedriver_binary
 import telebot
 from telebot import types
 from dotenv import load_dotenv
+config = load_dotenv(".env")
 import datetime
 import selenium
-config = load_dotenv(".env")
+
+
+
 
 path="chromedriver.exe"
 options=webdriver.ChromeOptions()
@@ -27,7 +31,8 @@ options.add_argument("--disable-dev-sh-usage")
 
 API_KEY=os.getenv('API_KEY')
 bot = telebot.TeleBot(API_KEY)
-############################################### news paper###################################
+
+#############################################################################################
 @bot.message_handler(commands=['Paper'])
 def greet(message):
     try:
@@ -48,6 +53,14 @@ def greet(message):
             bot.send_photo(chat_id, paperpg, protect_content=True ,disable_notification=True)
     except:
         bot.reply_to(message,'sorry , maintenance Break' )
+
+
+
+
+
+
+
+
 
 ########### telegram bot'''#########################################
 @bot.message_handler(commands=['A'])
@@ -146,7 +159,7 @@ def greet(message):
 @bot.message_handler(commands=['start'])
 def greet(message):
 #     user_first_name = str(message.chat.first_name) 
-    bot.reply_to(message, f"Hey!  \n Welcome 😍 \n Please type your zone , (ex :- /A )  \n Do you want to read today News paper Type /Paper ")
+    bot.reply_to(message, f"Hey!  \n Welcome 😍 \nPlease type your zone , (ex :- /A ) \n\n Type /Paper For newspaper  ")
     
 ########### telegram bot'''#########################################
 driver =webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
