@@ -13,7 +13,6 @@ import os
 import time
 import chromedriver_binary
 import telebot
-from telebot import types
 from dotenv import load_dotenv
 config = load_dotenv(".env")
 import datetime
