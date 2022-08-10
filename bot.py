@@ -16,50 +16,37 @@ import chromedriver_binary
 from dotenv import load_dotenv
 config = load_dotenv(".env")
 
-
-
-
-
 path="chromedriver.exe"
 options=webdriver.ChromeOptions()
 options.binary_location=os.environ.get("GOOGLE_CHROME_BIN")
 options.add_argument("--headless")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-sh-usage")
-
 API_KEY=os.getenv('API_KEY')
-bot = telebot.TeleBot(API_KEY)
+bot = telebot.TeleBot(5457090710:AAES24WOYJ52JfWztzmaEOSCajZCtbxvMCs)
 
 #############################################################################################
-# @bot.message_handler(commands=['Paper'])
-# def greet(message):
-#     try:
-#         today=datetime.datetime.now().strftime('%Y-%m-%d')
-#         chat_id=message.chat.id
-#         pagelist=[]
-#         paperlist=[]
-#         for i in range(1,11):
-#             ur='https://epaper.virakesari.lk/newspaper/Daily/main/{}#page-{}'.format(today,i)
-#             pagelist.append(ur)
-#         for i,ii in enumerate(pagelist,start=1):
-#             options=webdriver.ChromeOptions()
-#             options.headless = True
-#             driver =webdriver.Chrome(executable_path=r"C:\Users\kajan\Desktop\Python\Web Scraping\chromedriver",options=options)
-#             driver.get(url=ii)
-#             soup=BeautifulSoup(driver.page_source,'html')
-#             paperpg=soup.find('img',id='pageImage')['src']
-#             bot.send_photo(chat_id, paperpg, protect_content=True ,disable_notification=True)
-#     except Exception:
-#         bot.reply_to(message,'sorry , maintenance Break' )
-
-
-
-
-
-
-
-
-
+@bot.message_handler(commands=['Paper'])
+def greet(message):
+    try:
+        today=datetime.datetime.now().strftime('%Y-%m-%d')
+        chat_id=message.chat.id
+        pagelist=[]
+        paperlist=[]
+        for i in range(1,11):
+            ur='https://epaper.virakesari.lk/newspaper/Daily/main/{}#page-{}'.format(today,i)
+            #         pagelist.append(ur)
+            options=webdriver.ChromeOptions()
+            options.headless = True
+            driver =webdriver.Chrome(executable_path=r"C:\Users\kajan\Desktop\Python\Web Scraping\chromedriver",options=options)
+            driver.get(ur)
+            soup=BeautifulSoup(driver.page_source,'html')
+            paperpg=soup.find('img',id='pageImage')['src']
+            bot.send_photo(chat_id, paperpg, protect_content=True ,disable_notification=True)
+            
+    except Exception:
+        
+        bot.reply_to(message,'sorry , maintenance Break' )
 ########### telegram bot'''#########################################
 @bot.message_handler(commands=['A'])
 def greet(message):
@@ -158,7 +145,6 @@ def greet(message):
 def greet(message):
 #     user_first_name = str(message.chat.first_name) 
     bot.reply_to(message, f"Hey!  \n Welcome 😍 \nPlease type your zone , (ex :- /A ) \n\n Type /Paper For newspaper  ")
-    
 ########### telegram bot'''#########################################
 driver =webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
 url='https://cebcare.ceb.lk/Incognito/DemandMgmtSchedule'
