@@ -17,9 +17,7 @@ from dotenv import load_dotenv
 import selenium 
 import datetime
 
-
 config = load_dotenv(".env")
-
 
 API_KEY=os.getenv('API_KEY')
 bot = telebot.TeleBot(API_KEY)
@@ -27,6 +25,27 @@ bot = telebot.TeleBot(API_KEY)
 
 ########### telegram bot'''#########################################
 
+## paper sending Function
+@bot.message_handler(commands=['Paper'])
+def paper(message):
+    today=datetime.datetime.now().strftime('%Y-%m-%d')
+    chat_id=message.chat.id
+    pagelist=[]
+    paperlist=[]
+    for i in range(1,11):
+        ur='https://epaper.virakesari.lk/newspaper/Daily/main/{}#page-{}'.format(today,i)
+#         pagelist.append(ur)
+        options=webdriver.ChromeOptions()
+        options.headless = True
+        driver =webdriver.Chrome(executable_path=r"C:\Users\kajan\Desktop\Python\Web Scraping\chromedriver",options=options)
+        driver.get(ur)
+        soup=BeautifulSoup(driver.page_source,'html')
+        paperpg=soup.find('img',id='pageImage')['src']
+        paperlist.append(paperpg)
+        
+        bot.send_photo(chat_id, paperpg, protect_content=True ,disable_notification=True)
+
+ ### Current Cut Schdl sending Function
 @bot.message_handler()
 def scrap(msg):
     zz=str(msg.text)
