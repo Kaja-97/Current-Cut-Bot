@@ -33,12 +33,21 @@ def paper(message):
     pagelist=[]
     paperlist=[]
     for i in range(1,11):
-        ur='https://epaper.virakesari.lk/newspaper/Daily/main/{}#page-{}'.format(today,i)
-#         pagelist.append(ur)
+        path="chromedriver.exe"
         options=webdriver.ChromeOptions()
-        options.headless = True
-        driver =webdriver.Chrome(executable_path=r"C:\Users\kajan\Desktop\Python\Web Scraping\chromedriver",options=options)
-        driver.get(ur)
+        options.binary_location=os.environ.get("GOOGLE_CHROME_BIN")
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-sh-usage")
+        driver =webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
+        
+        ########### telegram bot'''#########################################
+        
+        url='https://epaper.virakesari.lk/newspaper/Daily/main/{}#page-{}'.format(today,i)
+        pag=driver.get(url)
+        #named soup la apply panala name ah diract sode podiruku itha
+        pagg=driver.page_source
+#         pagelist.append(ur)
         soup=BeautifulSoup(driver.page_source,'html')
         paperpg=soup.find('img',id='pageImage')['src']
         paperlist.append(paperpg)
@@ -63,11 +72,12 @@ def scraper(x):
     #######################################################################################
     path="chromedriver.exe"
     options=webdriver.ChromeOptions()
+    options.binary_location=os.environ.get("GOOGLE_CHROME_BIN")
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-sh-usage")
+    driver =webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
     ###############################################################hhhhhhhhh######################
-    driver =webdriver.Chrome(executable_path=r"C:\Users\kajan\Desktop\Python\Web Scraping\chromedriver.exe",chrome_options=options)
     url='https://cebcare.ceb.lk/Incognito/DemandMgmtSchedule'
     pag=driver.get('https://cebcare.ceb.lk/Incognito/DemandMgmtSchedule')
     pagg=driver.page_source
@@ -101,6 +111,6 @@ def scraper(x):
                 for i in range(len(AA)):
                     B=code_html=code_html + '\n\n Zone:' + str((AA['Zone'].iloc[i])) +' - '+' Time: ' + str((AA['Time'].iloc[i]))
                     A.append(B)
-                    print('XX')
+                    
 
 bot.polling()
